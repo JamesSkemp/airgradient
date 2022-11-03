@@ -34,19 +34,19 @@ MIT License
 AirGradient ag = AirGradient();
 
 // Display bottom right
-U8G2_SH1106_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);
+//U8G2_SH1106_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);
 
 // Replace above if you have display on top left
-//U8G2_SH1106_128X64_NONAME_F_HW_I2C u8g2(U8G2_R2, /* reset=*/ U8X8_PIN_NONE);
+U8G2_SH1106_128X64_NONAME_F_HW_I2C u8g2(U8G2_R2, /* reset=*/ U8X8_PIN_NONE);
 
 
 // CONFIGURATION START
 
 //set to the endpoint you would like to use
-String APIROOT = "http://hw.airgradient.com/";
+String APIROOT = "http://192.168.0.60/airgradient/";
 
 // set to true to switch from Celcius to Fahrenheit
-boolean inF = false;
+boolean inF = true;
 
 // set to true if you want to connect to wifi. You have 60 seconds to connect. Then it will go into an offline mode.
 boolean connectWIFI=true;
@@ -198,8 +198,8 @@ void sendToServer() {
    WiFiManager wifiManager;
    //WiFi.disconnect(); //to delete previous saved hotspot
    String HOTSPOT = "AG-" + String(ESP.getChipId(), HEX);
-   updateOLED2("60s to connect", "to Wifi Hotspot", HOTSPOT);
-   wifiManager.setTimeout(60);
+   updateOLED2("90s to connect", "to Wifi Hotspot", HOTSPOT);
+   wifiManager.setTimeout(90);
    if (!wifiManager.autoConnect((const char * ) HOTSPOT.c_str())) {
      updateOLED2("booting into", "offline mode", "");
      Serial.println("failed to connect and hit timeout");
