@@ -22,7 +22,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapPost("/sensors/airgradient{chipId}/measures", async (string chipId, AirGradientData data) => {
+app.MapPost("/sensors/airgradient:{chipId}/measures", async (string chipId, AirGradientData data) => {
     return Results.Ok();
 });
 
