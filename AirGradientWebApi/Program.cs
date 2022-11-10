@@ -10,6 +10,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.UsePathBase("/airgradient");
 app.UseForwardedHeaders(new ForwardedHeadersOptions
 {
     ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
@@ -21,6 +22,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseRouting();
+
+app.MapGet("/test", () => {
+    return Results.Ok("Test looks good.");
+});
 
 app.MapPost("/sensors/airgradient:{chipId}/measures", async (string chipId, AirGradientData data) => {
     return Results.Ok();
