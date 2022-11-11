@@ -32,7 +32,13 @@ Next create a directory for the Web API.
 1. `sudo mkdir /var/www/airgradient/html`
 2. `sudo chown -R www-data:www-data /var/www/airgradient/html`
 
+Create a directory for the database:
+
+1. `sudo mkdir /var/www/airgradient/Database`
+2. `sudo chown -R www-data:www-data /var/www/airgradient/Database`
+
 Copy files from local to remote:
 
 1. `scp -r .\bin\Release\net6.0\publish\* user@<server>:/var/www/airgradient/html`
+1. `scp -r .\Database\* user@<server>:/var/www/airgradient/Database`
 
