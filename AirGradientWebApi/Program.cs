@@ -1,5 +1,7 @@
 using System.Text.Json.Serialization;
+using AirGradientWebApi;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<AirGradientWebApiContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("AirGradientWebApiContext") ?? throw new InvalidOperationException("Connection string 'AirGradientWebApiContext' not found.")));
 
 var app = builder.Build();
 
