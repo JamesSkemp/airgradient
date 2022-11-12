@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AirGradientWebApi.Migrations
 {
     [DbContext(typeof(AirGradientWebApiContext))]
-    [Migration("20221111050337_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20221111235923_InitialCreation")]
+    partial class InitialCreation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -44,25 +44,23 @@ namespace AirGradientWebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Co2")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("Co2")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Humidity")
+                    b.Property<int?>("Humidity")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<int?>("Pm02")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Temperature")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Pm02")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Temperature")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Wifi")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Wifi")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 

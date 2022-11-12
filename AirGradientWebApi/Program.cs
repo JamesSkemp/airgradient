@@ -1,6 +1,8 @@
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using AirGradientWebApi;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,11 +31,19 @@ if (app.Environment.IsDevelopment())
 }
 app.UseRouting();
 
-app.MapGet("/test", () => {
+app.MapGet("/test", ([FromServices]ILogger<Program> logger) => {
+    logger.LogInformation("Test accessed");
     return Results.Ok("Test looks good.");
 });
 
-app.MapPost("/sensors/airgradient:{chipId}/measures", async (string chipId, AirGradientData data) => {
+app.MapPost("/sensors/airgradient:{chipId}/measures", async (string chipId, AirGradientData data, [FromServices]ILogger<Program> logger) => {
+    logger.LogInformation(chipId + " = " + JsonSerializer.Serialize(data));
+
+    return Results.Ok();
+});
+app.MapPost("/asdf/sensors/airgradient:{chipId}/measures", async (string chipId, object data, [FromServices]ILogger<Program> logger) => {
+    logger.LogInformation(JsonSerializer.Serialize(data));
+
     return Results.Ok();
 });
 
@@ -41,14 +51,14 @@ app.Run();
 
 record AirGradientData(
     [property: JsonPropertyName("wifi")]
-    string Wifi,
-    [property: JsonPropertyName("rc02")]
-    string? Co2,
+    int Wifi,
+    [property: JsonPropertyName("rco2")]
+    int? Co2,
     [property: JsonPropertyName("pm02")]
-    string? Pm02,
+    int? Pm02,
     [property: JsonPropertyName("atmp")]
-    string Temperature,
+    decimal Temperature,
     [property: JsonPropertyName("rhum")]
-    string? Humidity
+    int? Humidity
     ) {
 }

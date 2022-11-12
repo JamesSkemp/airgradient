@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AirGradientWebApi.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialCreation : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,11 +29,11 @@ namespace AirGradientWebApi.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Wifi = table.Column<string>(type: "TEXT", nullable: false),
-                    Co2 = table.Column<string>(type: "TEXT", nullable: true),
-                    Pm02 = table.Column<string>(type: "TEXT", nullable: true),
-                    Temperature = table.Column<string>(type: "TEXT", nullable: false),
-                    Humidity = table.Column<string>(type: "TEXT", nullable: true),
+                    Wifi = table.Column<int>(type: "INTEGER", nullable: false),
+                    Co2 = table.Column<int>(type: "INTEGER", nullable: true),
+                    Pm02 = table.Column<int>(type: "INTEGER", nullable: true),
+                    Temperature = table.Column<decimal>(type: "TEXT", nullable: false),
+                    Humidity = table.Column<int>(type: "decimal(18, 2)", nullable: true),
                     Created = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
